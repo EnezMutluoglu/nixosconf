@@ -93,7 +93,7 @@
   };
 
   # Install firefox.
-  #programs.firefox.enable = true;
+ # programs.firefox.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -101,66 +101,24 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
-  vim
-  bashInteractive
-  cacert
-  rsync
-  parted
-  inetutils
-  python312
-  python312Packages.pip
-  python312Packages.netaddr
-  lsof
-  fio
-  gnupg
-  glibcLocales
-  sysstat
-  iotop
-  iftop
-  nettools
-  unzip
-  zip
-  man
-  psmisc
-  curl
-  wget
-  git
-  github-desktop
-  parallel
-  atop
-  tmux
-  jq
-  tcpdump
-  hping
-  acl
-  clblast
-  unixtools.fdisk
-  strace
-  htop
-  btop
-  vscode
-  brave
-  kdePackages.wayland
-  xwayland
-  vmware-workstation
+  vim bashInteractive cacert rsync parted inetutils python312 python312Packages.pip 
+  python312Packages.netaddr lsof fio gnupg glibcLocales sysstat iotop iftop nettools 
+  unzip zip man psmisc curl wget git github-desktop parallel atop tmux jq tcpdump hping 
+  acl clblast unixtools.fdisk strace htop btop vscode brave kdePackages.wayland xwayland 
+  gparted btrfs-progs
+  
   ];
   
- programs.steam = {
+  programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;
     dedicatedServer.openFirewall = true;
  };
 
- 
- virtualisation = {
-   vmware = {
-     host.enable = true;
-   };
- };
-
-
+  hardware.nvidia.modesetting.enable = true;
+  hardware.opengl.enable = true;
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
